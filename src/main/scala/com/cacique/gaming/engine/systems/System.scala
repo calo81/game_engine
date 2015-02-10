@@ -7,18 +7,30 @@ import scala.reflect.ClassTag
 /**
  * Created by cscarion on 09/02/15.
  */
-abstract class System extends Actor{
-  def start: Unit = {
+abstract class System extends Actor {
+  var started = false
 
+  def receive = handleMessage orElse commonReceive
+
+  val commonReceive: Receive = {
+    case SystemStart =>
+      println(s"Started ${this.getClass}")
+      started = true
+      self ! Tick
+    case Tick =>
+      doStuff
+      self ! Tick
   }
 
-  def receive = {
-    case _ => None
+  val handleMessage: Receive
+
+  def doStuff = {
+
   }
 }
 
 abstract class SystemActor[T <: System : ClassTag] {
-  def instance(implicit actorSystem: ActorSystem) = {
+  def apply()(implicit actorSystem: ActorSystem) = {
     new SystemWrapper(actorSystem.actorOf(Props[T]))
   }
 }

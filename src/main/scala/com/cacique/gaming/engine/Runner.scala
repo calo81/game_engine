@@ -14,6 +14,6 @@ object Runner {
   }
 
   private def systems = {
-    List[SystemWrapper](UserInputSystem.instance)
+    Seq[SystemWrapper](UserInputSystem())
   }
 }
