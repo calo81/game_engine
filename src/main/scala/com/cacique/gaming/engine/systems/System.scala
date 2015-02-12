@@ -1,6 +1,8 @@
 package com.cacique.gaming.engine.systems
 
 import akka.actor.{Props, ActorSystem, Actor}
+import org.lwjgl.input.{Keyboard, Mouse}
+import org.lwjgl.opengl.Display
 
 import scala.reflect.ClassTag
 
@@ -14,23 +16,29 @@ abstract class System extends Actor {
 
   val commonReceive: Receive = {
     case SystemStart =>
+      context.actorSelection("akka://GameEngine/user/ActorDispatcher") ! RegisterActor(self)
       println(s"Started ${this.getClass}")
       started = true
       self ! Tick
     case Tick =>
-      doStuff
+      onTick
+      Thread.sleep(1000)
       self ! Tick
   }
 
-  val handleMessage: Receive
+  def handleMessage: Receive = {
+    case Noop =>
+  }
 
-  def doStuff = {
+  def onTick = {
 
   }
 }
 
 abstract class SystemActor[T <: System : ClassTag] {
   def apply()(implicit actorSystem: ActorSystem) = {
-    new SystemWrapper(actorSystem.actorOf(Props[T]))
+    val actorNameSplits = this.getClass.getCanonicalName.split("\\.")
+    val actorName = actorNameSplits(actorNameSplits.length - 1).split("\\$")(0)
+    new SystemWrapper(actorSystem.actorOf(Props[T], actorName))
   }
 }

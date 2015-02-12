@@ -1,17 +1,23 @@
 package com.cacique.gaming.engine.systems
 
+import java.util.Scanner
+
 import akka.actor.{Props, ActorSystem}
+import org.lwjgl.input.{Keyboard, Mouse}
+import org.lwjgl.opengl.Display
 import scala.reflect.ClassTag
 /**
  * Created by cscarion on 09/02/15.
  */
+
+case class KeyPressed(key: Int)
+
 class UserInputSystem extends System{
-  override val handleMessage: Receive = {
-    case Tick =>
-      while(true){
-        val c = System.in.read()
-        println(s"IT IS A $c")
-      }
+
+  override def handleMessage = {
+    case KeyPressed(key) =>
+      println("Andale andale")
+
   }
 }
 

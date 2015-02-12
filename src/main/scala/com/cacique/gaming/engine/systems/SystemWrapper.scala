@@ -7,6 +7,7 @@ import akka.actor.{Actor, ActorRef}
  */
 object SystemStart
 object Tick
+object Noop
 
 class SystemWrapper(actor: ActorRef) {
   def start = {
