@@ -2,6 +2,7 @@ package com.cacique.gaming.engine
 
 import akka.actor.{Props, ActorSystem}
 import com.cacique.gaming.engine.systems._
+import com.cacique.gaming.engine.systems.implementations.{GameSystem, UserInputSystem}
 import org.lwjgl.input.{Mouse, Keyboard}
 import org.lwjgl.opengl.{DisplayMode, Display}
 

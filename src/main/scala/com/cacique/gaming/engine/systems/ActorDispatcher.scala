@@ -1,6 +1,6 @@
 package com.cacique.gaming.engine.systems
 
-import akka.actor.{ActorRef, Actor}
+import akka.actor.{ActorContext, ActorRef, Actor}
 import akka.actor.Actor.Receive
 
 /**
@@ -17,5 +17,11 @@ class ActorDispatcher extends Actor {
       actors = actors :+ actor
     case event =>
       actors.foreach(_ ! event)
+  }
+}
+
+object ActorDispatcher {
+  def apply()(implicit context: ActorContext) = {
+    context.actorSelection("akka://GameEngine/user/ActorDispatcher")
   }
 }
