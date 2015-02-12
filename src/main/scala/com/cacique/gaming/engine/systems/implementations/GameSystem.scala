@@ -21,7 +21,7 @@ class GameSystem extends System {
     Display.create()
     Display.setTitle("The Akka Game");
     Mouse.setGrabbed(true)
-    Keyboard.create()
+
 
     GL11.glEnable(GL11.GL_TEXTURE_2D)
 
@@ -32,14 +32,16 @@ class GameSystem extends System {
     GL11.glLoadIdentity();
 
     GL11.glOrtho(0, 1024, 768, 0, -1, 1)
+    Keyboard.create
   }
 
   override def onTick = {
+    Display.makeCurrent()
     GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT)
-    GL11.glMatrixMode(GL11.GL_MODELVIEW)
-    GL11.glLoadIdentity()
     Display.update
-    ActorDispatcher() ! KeyPressed(Keyboard.getEventKey)
+    if (Keyboard.getEventKey != 0) {
+      ActorDispatcher() ! KeyPressed(Keyboard.getEventKey)
+    }
   }
 }
 
