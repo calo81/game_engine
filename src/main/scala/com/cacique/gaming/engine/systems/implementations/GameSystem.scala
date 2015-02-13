@@ -46,7 +46,9 @@ class GameSystem extends System {
     Keyboard.next()
     Keyboard.poll()
     if (Keyboard.getEventKey != 0) {
-      ActorDispatcher() ! KeyPressed(Keyboard.getEventKey)
+      if (Keyboard.getEventKeyState()) {
+        ActorDispatcher() ! KeyPressed(Keyboard.getEventKey)
+      }
     }
   }
 }

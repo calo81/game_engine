@@ -17,7 +17,6 @@ class UserInputSystem extends System {
 
   override def handleMessage = {
     case KeyPressed(key) =>
-      if (Keyboard.getEventKeyState()) {
         key match {
           case Keyboard.KEY_UP =>
             this.player ! MoveForward
@@ -27,7 +26,6 @@ class UserInputSystem extends System {
             System.exit(0)
           case _ =>
         }
-      }
   }
 
   override def customStart = {
