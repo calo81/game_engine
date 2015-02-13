@@ -1,5 +1,6 @@
 package com.cacique.gaming.engine.systems.implementations
 
+import akka.actor.{ActorRef, Props}
 import com.cacique.gaming.engine.systems.{System, SystemActor}
 import org.lwjgl.input.Keyboard
 
@@ -9,18 +10,28 @@ import org.lwjgl.input.Keyboard
 
 case class KeyPressed(key: Int)
 
+
 class UserInputSystem extends System {
+
+  var player: ActorRef = null
 
   override def handleMessage = {
     case KeyPressed(key) =>
-      println(key)
-      key match {
-        case Keyboard.KEY_UP =>
-          println("The dude is moving up")
-        case _ =>
-
+      if (Keyboard.getEventKeyState()) {
+        key match {
+          case Keyboard.KEY_UP =>
+            this.player ! MoveForward
+          case Keyboard.KEY_DOWN =>
+            this.player ! MoveBackward
+          case Keyboard.KEY_ESCAPE =>
+            System.exit(0)
+          case _ =>
+        }
       }
+  }
 
+  override def customStart = {
+    this.player = context.actorOf(Props[PlayerActor], "PlayerCharacter")
   }
 }
 

@@ -21,7 +21,7 @@ abstract class System extends Actor {
       customStart
       self ! Tick
     case Tick =>
-      println("tick", self)
+      //println("tick", self)
       onTick
       Thread.sleep(50)
       self ! Tick
