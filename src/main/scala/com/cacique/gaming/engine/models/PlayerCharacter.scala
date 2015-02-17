@@ -1,11 +1,12 @@
 package com.cacique.gaming.engine.models
 
+import com.cacique.gaming.engine.drawing.Sprite
 import org.apache.commons.math3.linear.{ArrayRealVector}
 
 /**
  * Created by cscarion on 13/02/15.
  */
-class PlayerCharacter {
+class PlayerCharacter extends Sprite{
 
   var position = new ArrayRealVector(Array[Double](1,1), false)
   var velocity = new ArrayRealVector(Array[Double](1,2), false)

@@ -10,3 +10,5 @@ resolvers += "Typesafe Repository" at
 libraryDependencies += "com.typesafe.akka" %% "akka-actor" % "2.3.9"
 
 libraryDependencies += "org.apache.commons" % "commons-math3" % "3.2"
+
+libraryDependencies += "org.lwjgl.lwjgl" % "lwjgl" % "2.8.4"

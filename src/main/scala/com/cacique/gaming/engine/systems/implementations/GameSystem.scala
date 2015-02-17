@@ -1,13 +1,19 @@
 package com.cacique.gaming.engine.systems.implementations
 
-import com.cacique.gaming.engine.systems.{ActorDispatcher, RegisterActor, System, SystemActor}
+import com.cacique.gaming.engine.drawing.Drawable
+import com.cacique.gaming.engine.systems._
 import org.lwjgl.input.{Keyboard, Mouse}
 import org.lwjgl.opengl.{GL11, Display}
 
 /**
  * Created by cscarion on 12/02/15.
  */
+
+case class Draw(drawable: Drawable)
+
 class GameSystem extends System {
+
+  var drawables: Seq[Drawable] = List[Drawable]()
 
   override def customStart = {
     val dm = org.lwjgl.util.Display.getAvailableDisplayModes(1024, 768, -1, -1, -1, -1, 60, 60);
@@ -37,6 +43,11 @@ class GameSystem extends System {
     Keyboard.enableRepeatEvents(true)
   }
 
+  override def handleMessage: Receive = {
+    case Draw(drawable) =>
+      drawables = drawables :+ drawable
+  }
+
   override def onTick = {
     if (!Display.isCurrent) {
       Display.makeCurrent
@@ -50,6 +61,11 @@ class GameSystem extends System {
         ActorDispatcher() ! KeyPressed(Keyboard.getEventKey)
       }
     }
+    renderScene
+  }
+
+  def renderScene: Unit = {
+    drawables.foreach(_.draw)
   }
 }
 
