@@ -22,6 +22,10 @@ class UserInputSystem extends System {
             this.player ! MoveForward
           case Keyboard.KEY_DOWN =>
             this.player ! MoveBackward
+          case Keyboard.KEY_LEFT =>
+            this.player ! TurnLeft
+          case Keyboard.KEY_RIGHT =>
+            this.player ! TurnRight
           case Keyboard.KEY_ESCAPE =>
             System.exit(0)
           case _ =>

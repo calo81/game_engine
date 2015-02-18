@@ -11,6 +11,8 @@ import com.cacique.gaming.engine.systems.ActorDispatcher
 
 object MoveForward
 object MoveBackward
+object TurnRight
+object TurnLeft
 
 class PlayerActor extends Actor{
 
@@ -22,6 +24,12 @@ class PlayerActor extends Actor{
       ActorDispatcher() ! Draw(playerCharacter.drawable)
     case MoveBackward =>
       playerCharacter.moveBackward
+      ActorDispatcher() ! Draw(playerCharacter.drawable)
+    case TurnRight =>
+      playerCharacter.turnRight
+      ActorDispatcher() ! Draw(playerCharacter.drawable)
+    case TurnLeft =>
+      playerCharacter.turnLeft
       ActorDispatcher() ! Draw(playerCharacter.drawable)
   }
 }
