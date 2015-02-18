@@ -13,7 +13,7 @@ case class Draw(drawable: Drawable)
 
 class GameSystem extends System {
 
-  var drawables: Seq[Drawable] = List[Drawable]()
+  var drawables = scala.collection.mutable.Map[String, Drawable]()
 
   override def customStart = {
     val dm = org.lwjgl.util.Display.getAvailableDisplayModes(1024, 768, -1, -1, -1, -1, 60, 60);
@@ -41,12 +41,16 @@ class GameSystem extends System {
 
   override def handleMessage: Receive = {
     case Draw(drawable) =>
-      drawables = drawables :+ drawable
+      drawables(drawable.id) = drawable
   }
 
   override def onTick = {
     if (!Display.isCurrent) {
-      Display.makeCurrent
+      try {
+        Display.makeCurrent
+      } catch {
+        case _ =>
+      }
     }
     GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT)
     Keyboard.next()
@@ -61,8 +65,9 @@ class GameSystem extends System {
   }
 
   def renderScene: Unit = {
-    drawables.foreach(_.draw)
+    drawables.values.foreach(_.draw)
   }
+
 }
 
 object GameSystem extends SystemActor[GameSystem]

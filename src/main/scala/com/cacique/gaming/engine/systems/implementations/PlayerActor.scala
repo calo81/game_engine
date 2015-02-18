@@ -19,9 +19,9 @@ class PlayerActor extends Actor{
   override def receive: Receive = {
     case MoveForward =>
       playerCharacter.moveForward
-      ActorDispatcher() ! Draw(playerCharacter)
+      ActorDispatcher() ! Draw(playerCharacter.drawable)
     case MoveBackward =>
       playerCharacter.moveBackward
-      ActorDispatcher() ! Draw(playerCharacter)
+      ActorDispatcher() ! Draw(playerCharacter.drawable)
   }
 }
