@@ -1,18 +1,13 @@
 package com.cacique.gaming.engine.models
 
 import com.cacique.gaming.engine.drawing.{Drawable, WithDrawable, Sprite}
+import com.cacique.gaming.engine.models.features.Position
 import org.apache.commons.math3.linear.{ArrayRealVector}
 
 /**
  * Created by cscarion on 13/02/15.
  */
-class PlayerCharacter extends WithDrawable {
-
-  var position = new ArrayRealVector(Array[Double](1, 1), false)
-  var velocity = new ArrayRealVector(Array[Double](1, 2), false)
-  var orientation = 0.0
-  var rotation = 0.0
-  val timeUpdate = 0.05
+class PlayerCharacter(name: String) extends Character(name) {
 
   def moveForward = {
     position = position.add(velocity.mapMultiply(timeUpdate))
@@ -41,6 +36,7 @@ class PlayerCharacter extends WithDrawable {
     velocity = new ArrayRealVector(Array[Double](velocityX, velocityY), false)
     position = position.add(velocity.mapMultiply(timeUpdate))
   }
+
 
   override def drawable: Drawable = {
     new Sprite("player", position)

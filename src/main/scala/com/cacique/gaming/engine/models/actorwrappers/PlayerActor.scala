@@ -1,9 +1,9 @@
-package com.cacique.gaming.engine.systems.implementations
+package com.cacique.gaming.engine.models.actorwrappers
 
 import akka.actor.Actor
-import akka.actor.Actor.Receive
 import com.cacique.gaming.engine.models.PlayerCharacter
 import com.cacique.gaming.engine.systems.ActorDispatcher
+import com.cacique.gaming.engine.systems.implementations.{PlayerChangedPosition, Draw}
 
 /**
  * Created by cscarion on 13/02/15.
@@ -16,20 +16,25 @@ object TurnLeft
 
 class PlayerActor extends Actor{
 
-  val playerCharacter = new PlayerCharacter
+  val playerCharacter = new PlayerCharacter("hero")
 
   override def receive: Receive = {
     case MoveForward =>
       playerCharacter.moveForward
-      ActorDispatcher() ! Draw(playerCharacter.drawable)
+      publishPlayerMessages
     case MoveBackward =>
       playerCharacter.moveBackward
-      ActorDispatcher() ! Draw(playerCharacter.drawable)
+      publishPlayerMessages
     case TurnRight =>
       playerCharacter.turnRight
-      ActorDispatcher() ! Draw(playerCharacter.drawable)
+      publishPlayerMessages
     case TurnLeft =>
       playerCharacter.turnLeft
-      ActorDispatcher() ! Draw(playerCharacter.drawable)
+      publishPlayerMessages
+  }
+
+  private def publishPlayerMessages = {
+    ActorDispatcher() ! Draw(playerCharacter.drawable)
+    ActorDispatcher() ! PlayerChangedPosition(playerCharacter.position)
   }
 }

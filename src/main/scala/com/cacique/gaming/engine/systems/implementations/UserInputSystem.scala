@@ -1,6 +1,7 @@
 package com.cacique.gaming.engine.systems.implementations
 
 import akka.actor.{ActorRef, Props}
+import com.cacique.gaming.engine.models.actorwrappers._
 import com.cacique.gaming.engine.systems.{System, SystemActor}
 import org.lwjgl.input.Keyboard
 

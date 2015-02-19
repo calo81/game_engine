@@ -45,6 +45,7 @@ class GameSystem extends System {
   }
 
   override def onTick = {
+    println(Thread.currentThread().getId)
     if (!Display.isCurrent) {
       try {
         Display.makeCurrent

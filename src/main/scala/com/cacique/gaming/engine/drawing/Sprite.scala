@@ -1,12 +1,12 @@
 package com.cacique.gaming.engine.drawing
 
-import org.apache.commons.math3.linear.RealVector
+import com.cacique.gaming.engine.models.features.Position
 import org.lwjgl.opengl.GL11
 
 /**
  * Created by cscarion on 16/02/15.
  */
-class Sprite(val id: String, position: RealVector) extends Drawable {
+class Sprite(val id: String, position: Position) extends Drawable {
 
   val textureLoader = new TextureLoader
 
@@ -16,8 +16,8 @@ class Sprite(val id: String, position: RealVector) extends Drawable {
     // bind to the appropriate texture for this sprite
     // texture.bind
 
-    val positionXChange = (position.getEntry(0).toFloat * 10)
-    val positionYChange = (position.getEntry(1).toFloat * 10)
+    val positionXChange = (position.x * 10).toFloat
+    val positionYChange = (position.y * 10).toFloat
 
     GL11.glColor3f(0.5f, 0.5f, 1.0f);
 
