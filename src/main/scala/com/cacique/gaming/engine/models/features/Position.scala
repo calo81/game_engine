@@ -11,13 +11,17 @@ class Position(val x: Double, val y: Double) {
     this(vector.getEntry(0), vector.getEntry(1))
   }
 
-  val delegateVector = new ArrayRealVector(Array[Double](x, y), false)
+  val vector = new ArrayRealVector(Array[Double](x, y), false)
 
   def add(vector: RealVector) = {
-    new Position(delegateVector.add(vector))
+    new Position(this.vector.add(vector))
   }
 
   def subtract(vector: RealVector) = {
-    new Position(delegateVector.subtract(vector))
+    new Position(this.vector.subtract(vector))
+  }
+
+  override def toString = {
+    vector.toString
   }
 }
