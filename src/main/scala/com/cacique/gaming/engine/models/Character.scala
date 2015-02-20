@@ -20,7 +20,6 @@ class Character(name: String) extends WithDrawable{
 
   def moveForward = {
     position = position.add(velocity.mapMultiply(timeUpdate))
-    println(position.toString)
   }
 
   def moveBackward = {

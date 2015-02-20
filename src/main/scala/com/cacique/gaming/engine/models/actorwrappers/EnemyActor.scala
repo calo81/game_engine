@@ -14,6 +14,7 @@ class EnemyActor extends Actor{
 
   override def receive: Receive = {
     case PlayerChangedPosition(position) =>
+      println("sdfsdf")
       enemy.playerChangedPosition(position)
   }
 }

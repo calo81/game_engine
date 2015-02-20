@@ -2,7 +2,7 @@ package com.cacique.gaming.engine
 
 import akka.actor.{Props, ActorSystem}
 import com.cacique.gaming.engine.systems._
-import com.cacique.gaming.engine.systems.implementations.{GameSystem, UserInputSystem}
+import com.cacique.gaming.engine.systems.implementations.{GameSystem, UserInputSystem, AISystem}
 
 /**
  * Created by cscarion on 09/02/15.
@@ -16,6 +16,6 @@ object Runner {
   }
 
   private def systems = {
-    Seq[SystemWrapper](GameSystem(), UserInputSystem())
+    Seq[SystemWrapper](GameSystem(), UserInputSystem(), AISystem())
   }
 }
