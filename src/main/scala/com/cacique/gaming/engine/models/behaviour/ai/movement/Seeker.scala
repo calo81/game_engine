@@ -18,5 +18,6 @@ trait Seeker {
   def seek(targetPosition: Position) = {
     velocity = targetPosition.subtract(position)
     velocity = velocity.normalize
+    position = position.add(velocity.mapMultiply(0.1))
   }
 }

@@ -10,14 +10,22 @@ import com.cacique.gaming.engine.systems.{SystemActor, System}
  */
 
 case class PlayerChangedPosition(position: Position)
+case class EnemyChangedPosition(position: Position)
 
 class AISystem extends System {
 
   var enemy: ActorRef = null
+  var currentPlayerPosition:Position = null
 
   override def handleMessage: Receive = {
     case p: PlayerChangedPosition =>
-      enemy ! p
+      currentPlayerPosition = p.position
+  }
+
+  override def onTick = {
+    if(currentPlayerPosition != null ) {
+      enemy ! PlayerChangedPosition(currentPlayerPosition)
+    }
   }
 
   override def customStart = {

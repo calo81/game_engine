@@ -24,9 +24,9 @@ class Sprite(val id: String, position: Position) extends Drawable {
     // draw quad
     GL11.glBegin(GL11.GL_QUADS);
     GL11.glVertex2f(100 + positionXChange, 100 + positionYChange);
-    GL11.glVertex2f(100 + 200 + positionXChange, 100 + positionYChange);
-    GL11.glVertex2f(100 + 200 + positionXChange, 100 + 200 + positionYChange);
-    GL11.glVertex2f(100 + positionXChange, 100 + 200 + positionYChange);
+    GL11.glVertex2f(100 + 50 + positionXChange, 100 + positionYChange);
+    GL11.glVertex2f(100 + 50 + positionXChange, 100 + 50 + positionYChange);
+    GL11.glVertex2f(100 + positionXChange, 100 + 50 + positionYChange);
     GL11.glEnd();
 
   }
