@@ -73,7 +73,7 @@ class GameSystem extends System {
       })
     }
 
-    def renderScene(drawables: scala.collection.mutable.Map[String, Drawable]): Unit = {
+    private def renderScene(drawables: scala.collection.mutable.Map[String, Drawable]): Unit = {
       drawables.values.foreach(_.draw)
     }
   }
