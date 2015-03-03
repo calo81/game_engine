@@ -9,8 +9,11 @@ import scala.reflect.ClassTag
  * Created by cscarion on 09/02/15.
  */
 abstract class System extends Actor {
+
   var started = false
   implicit val actorContext = this.context
+  val fps = 60
+
   def receive = handleMessage orElse commonReceive
 
   val commonReceive: Receive = {
@@ -21,9 +24,8 @@ abstract class System extends Actor {
       customStart
       self ! Tick
     case Tick =>
-      //println("tick", self)
       onTick
-      Thread.sleep(50)
+      Thread.sleep(1000/fps)
       self ! Tick
   }
 
