@@ -31,7 +31,7 @@ trait Seeker {
     if (!ShootingDistance(position, targetPosition).reached) {
       velocity = targetPosition.subtract(position)
       velocity = velocity.normalize
-      position = position.add(velocity.mapMultiply(0.1))
+      position = position.add(velocity.mapMultiply(0.01))
     }
   }
 }
